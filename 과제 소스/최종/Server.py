@@ -184,12 +184,16 @@ if __name__ == "__main__":
                          try : 
                              for x in range(4) : 
                                  #the problem is when 1,3 user is in 2 is empty so 3 can't talk in the room. it goes to except, when x == 2
-                                 if (sock == User_Info[x][3]) & (Count_Room > 0) : 
-                                     RoomNum = User_Info[x][4]
-                                     break
+                                 try:
+				     if (sock == User_Info[x][3]) & (Count_Room > 0) : 
+               		        	  print 'test if'
+               		                  RoomNum = User_Info[x][4]
+                	                  break
+				 except:
+				     i=i
                              broadcast_chatroom(sock, "\r" + '<' + str(sock.getpeername()) + '> ' + data, RoomNum)
                          except : 
-                             Count_Room = Count_Room                
+                             Count_Room = Count_Room                 
                    
                  except: 
                      broadcast_data(sock, "Client (%s, %s) is offline\n" % addr) 
